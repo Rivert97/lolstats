@@ -1,0 +1,307 @@
+html {
+	font-size: 62.5%; /* Reset para rem. 62.5% = 10px de 16ps */
+	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	display: grid;
+	grid-template-rows: 1fr;
+	font-family: 'Roboto Mono', monospace;
+	font-size: 1.6rem;
+}
+
+img {
+	max-width: 100%;
+}
+
+/* Globales */
+.hover-to-show { 
+	opacity: 0;
+	transition: all .2s ease-in-out;
+}
+
+.hover-to-show-link:hover .hover-to-show {
+	opacity: 1;
+	transition: all .2s ease-in-out;
+}
+
+/* Header */
+.site-header {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.barra-inicio {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.barra {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+@media screen and (max-width: 720px) {
+	.barra-inicio {
+		justify-content: end;
+	}
+}
+
+.barra.contacto{
+	background-color: #012840;
+}
+
+.logo {
+	display: block;
+	color: white;
+	padding: 1.5rem 1rem;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+@media screen and (max-width: 720px) {
+	.logo {
+		display: none;
+	}
+}
+
+.navegacion {
+	display: flex;
+}
+
+.navegacion div {
+	padding: 1.5rem 1rem;
+}
+
+.navegacion div:hover {
+	background-color: #0388A6;
+}
+
+.navegacion a {
+	text-decoration: none;
+	color: white;
+	font-size: 1.8rem;
+	font-weight: 700;
+}
+
+.titulo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: white;
+	transform: translateY(-50%);
+}
+
+.titulo h1 {
+	position: relative;
+	left: -50%;
+	font-size: 5rem;
+}
+
+.titulo p {
+	position: relative;
+	left: -50%;
+}
+
+#canvas-container {
+	flex-grow: 1;
+}
+
+/* Secciones */
+.contenedor {
+	min-height: 50vh;
+	width: 80%;
+	margin: 3rem auto;
+}
+
+.encabezado {
+	color: white;
+	text-align: center;
+}
+
+/* Proyectos */
+#proyectos {
+	background: linear-gradient(#025373, #0388A6);
+}
+
+.catalogo {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.proyecto {
+	position: relative;
+	width: 100%;
+	color: white;
+}
+
+.proyecto h4 {
+	margin: 0 0 1rem 0;
+}
+
+.proyecto p {
+	margin: 0;
+	margin-bottom: 1rem;
+	font-weight: 100;
+	font-size: 1.4rem;
+}
+
+.contenedor-preview {
+	overflow: hidden;
+	max-height: 30rem;
+}
+
+.contenedor-preview img {
+	top:-100%;
+	left:0;
+	right: 0;
+	bottom: -100%;
+	margin: auto;
+}
+
+.descripcion-proyecto {
+	padding: 1rem;
+	background-color: #011826EE;
+	position: absolute;
+	bottom: 0;
+}
+
+.descripcion-proyecto a {
+	text-decoration: none;
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 0.5rem;
+	color: white;
+	-webkit-border-radius: 0.5rem;
+	-moz-border-radius: 0.5rem;
+	border-radius: 0.5rem;
+	border: 1px solid white;
+}
+
+.descripcion-proyecto a:hover {
+	color: #44E1F2;
+	border: 1px solid #44E1F2;
+}
+
+/* Contacto */
+
+#contacto {
+	background: linear-gradient(#0388A6, #012840);
+	color: white;
+}
+
+.form-contacto {
+	max-width: 70rem;
+	margin: 0 auto;
+}
+
+.form-contacto div {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-contacto div label {
+	margin: 0.2rem 0;
+}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+textarea {
+	-webkit-border-radius: 0.5rem;
+	-moz-border-radius: 0.5rem;
+	border-radius: 0.5rem;
+	border: 1px solid #AAAAAA;
+	padding: 0.7rem;
+}
+
+#message {
+	height: 13rem;
+}
+
+input[type=submit],
+button {
+	background: #0388A6;
+	color: white;
+	border: 1px solid #0388A6;
+	margin-top: 0.5rem;
+	width: 100%;
+	padding: 0.7rem 0;
+	font-size: 1.6rem;
+	font-weight: 700;
+}
+
+input[type=submit]:hover,
+button:hover {
+	cursor: pointer;
+}
+
+.body-contacto {
+	background-color: #0388A6;
+}
+
+/* Footer */
+.site-footer {
+	background-color: #011826;
+	margin: 0;
+	color: white;
+	padding: 1rem 0;
+}
+
+.copy {
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+}
+
+.copy p {
+	margin: 0.5rem;
+}
+
+.disclaimer {
+	font-size: 1.4rem;
+	margin: 0;
+}
+
+.disclaimer a {
+	text-decoration: none;
+	color: white;
+}
+
+.disclaimer a:hover {
+	color: #44E1F2;
+}
+
+/* Acuerdo de privacidad */
+.aviso {
+	min-height: 80vh;
+	width: 100%;
+}
+
+.texto {
+	margin: auto;
+	padding: 1rem;
+	width: 80%;
+	background-color: white;
+	color: black !important;
+	font-family: Arial;
+}
+
+.texto h2 {
+	text-align: center;
+}
