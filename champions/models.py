@@ -2,7 +2,7 @@ from django.db import models
 import json
 import os
 
-DATA_DIR = "/home/rgarcia/Documents/projects/lolstats/data_dragon/11.23.1/data/es_MX/champion"
+DATA_DIR = "/datos/data_dragon/data/es_MX/champion"
 
 class Champion(models.Model):
     """Campeon del juego.

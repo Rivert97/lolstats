@@ -3,17 +3,52 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Campeones</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<link rel="stylesheet" type="text/css" href="{% static 'champions/normalize.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'champions/main.css' %}">
+
+		<title>Campeones</title>
 	</head>
 	<body>
-		<ul>
-			{% for champion in champions %}
-			<li><a href="{% url 'detail' champion.name %}">{{ champion.name }}</a></li>
-			{% endfor %}
-		</ul>
+		<header class="site-header">
+			<div class="header-content">
+				<div class="header-logo">
+				</div>
+				<ul class="navigation">
+					<a href="#"><div>Invocadores</div></a>
+					<a href="#"><div class="active">Campeones</div></a>
+					<a href="#"><div>Objetos</div></a>
+				</div>
+			</div>
+		</header>
+		<main>
+			<div class="container">
+				<div class="search-bar">
+					<form>
+						<input type="text" name="search_text"/>
+						<input type="submit" value="Buscar"/>
+				</div>
+				<div class="rol-bar">
+					<div><img src="{% static 'img/all.png' %}"</img></div>
+					<div><img src="{% static 'img/all.png' %}"</img></div>
+					<div><img src="{% static 'img/all.png' %}"</img></div>
+					<div><img src="{% static 'img/all.png' %}"</img></div>
+					<div><img src="{% static 'img/all.png' %}"</img></div>
+					<div><img src="{% static 'img/all.png' %}"</img></div>
+				</div>
+				<div class="champion-list">
+					{% for champion in champions %}
+					<div class="champion-item">
+						{% with 'champion/'|add:champion.name|add:'.png' as champ_tile %}
+						<img src="{% static champ_tile %}"/>
+						{% endwith %}
+						<a href="{% url 'detail' champion.name %}">{{ champion.name }}</a>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</main>
 	</body>
 </html>
 
