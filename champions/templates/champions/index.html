@@ -5,6 +5,9 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+		 <link rel="preconnect" href="https://fonts.googleapis.com">
+		 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;800;600&display=swap" rel="stylesheet"> 
 		<link rel="stylesheet" type="text/css" href="{% static 'champions/normalize.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'champions/main.css' %}">
 
@@ -30,21 +33,21 @@
 						<input type="submit" value="Buscar"/>
 				</div>
 				<div class="rol-bar">
-					<div><img src="{% static 'img/all.png' %}"</img></div>
-					<div><img src="{% static 'img/all.png' %}"</img></div>
-					<div><img src="{% static 'img/all.png' %}"</img></div>
-					<div><img src="{% static 'img/all.png' %}"</img></div>
-					<div><img src="{% static 'img/all.png' %}"</img></div>
-					<div><img src="{% static 'img/all.png' %}"</img></div>
+					<div class="active"><a href="#">Todos</a></div>
+					<div><a href="#">Superior</a></div>
+					<div><a href="#">Jungla</a></div>
+					<div><a href="#">Medio</a></div>
+					<div><a href="#">Inferior</a></div>
+					<div><a href="#">Soporte</a></div>
 				</div>
 				<div class="champion-list">
 					{% for champion in champions %}
-					<div class="champion-item">
-						{% with 'champion/'|add:champion.name|add:'.png' as champ_tile %}
+					<a class="champion-item" href="{% url 'detail' champion.name %}">
+						{% with 'champion/'|add:champion.identifier|add:'.png' as champ_tile %}
 						<img src="{% static champ_tile %}"/>
 						{% endwith %}
-						<a href="{% url 'detail' champion.name %}">{{ champion.name }}</a>
-					</div>
+						<div>{{ champion.name }}</div>
+					</a>
 					{% endfor %}
 				</div>
 			</div>
