@@ -17,7 +17,7 @@
 		</div>
 		<div class="champion-list">
 			{% for champion in champions %}
-			<a class="champion-item" href="{% url 'detail' champion.name %}">
+			<a class="champion-item" href="{% url 'detail' champion.identifier %}">
 				{% with 'champion/'|add:champion.identifier|add:'.png' as champ_tile %}
 				<img src="{% static champ_tile %}"/>
 				{% endwith %}

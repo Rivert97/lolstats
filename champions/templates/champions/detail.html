@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	<meta charset="utf-8">
-	<title>{{ champion.name }}</title>
-</head>
-	<body>
-		<p>{{ champion.name }}</p>
-		<ul>
-			{% for d in data %}
-			<li>{{ d }}</li>
-			{% endfor %}
-		</ul>
-	</body>
-</html>
-
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="container">
+		<div class="champ-summary">
+			<div class="champ-img">
+				{% with 'champion/'|add:champion.identifier|add:'.png' as champ_tile %}
+				<img src="{% static champ_tile %}"/>
+				{% endwith %}
+			</div>
+			<div class="champ-detail">
+				<div class="champ-name">
+					<span>{{ champion.name }}</span>
+				</div>
+				<div class="champ-spells">
+					<div class="spell">
+						{% with 'passive/'|add:data.passive.image.full as passive_img %}
+						<img src="{% static passive_img %}"/>
+						{% endwith %}
+						<div class="spell-descr">
+							<span class="spell-name">{{ data.passive.name }}</span>
+							<span class="spell-text">{{ data.passive.description }}</span>
+						</div>
+					</div>
+					{% for spell in data.spells %}
+						<div class="spell">
+							{% with 'spell/'|add:spell.image.full as spell_img %}
+							<img src="{% static spell_img %}"/>
+							{% endwith %}
+							<div class="spell-descr">
+								<span class="spell-name">{{ spell.name }}</span>
+								<span class="spell-text">{{ spell.description }}</span>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

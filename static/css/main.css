@@ -10,7 +10,7 @@ html {
 body {
 	min-height: 100vh;
 	margin: 0;
-	display: grid;
+	/*display: grid;*/
 	grid-template-rows: 1fr;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 1.6rem;
@@ -138,4 +138,62 @@ img {
 
 .champion-item:hover div {
 	font-weight: 600;
+}
+
+.champ-summary {
+	padding: 2rem 0;
+	display: flex;
+}
+
+.champ-img {
+	width: 12rem;
+}
+
+.champ-detail {
+	margin-left: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.champ-name {
+	font-size: 2.2rem;
+	font-weight: 800;
+	margin: 1rem 0;
+}
+
+.champ-spells {
+	display: flex;
+}
+
+.spell {
+	position: relative;
+}
+
+.spell img {
+	width: 3.5rem;
+	margin-right: 1rem;
+}
+
+.spell-descr {
+	display: none;
+	padding: 1rem;
+	width: 30rem;
+	z-index: 1;
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -2.25rem;
+	background-color: black;
+	color: white;
+}
+
+.spell:hover .spell-descr {
+	display: flex;
+	flex-direction: column;
+}
+
+.spell-name {
+	font-weight: 600;
+	padding-bottom: 1rem;
 }

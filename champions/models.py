@@ -20,10 +20,10 @@ class Champion(models.Model):
 
     def get_data(self):
         """Devuelve los datos guardados en formato JSON del campeon."""
-        filepath = DATA_DIR + "/" + self.name + ".json"
+        filepath = DATA_DIR + "/" + self.identifier + ".json"
         rawdata = {}
         if os.path.isfile(filepath):
             with open(filepath, 'r') as f:
                 rawdata = json.load(f)
         data = rawdata.get('data', {})
-        return data.get(self.name, {})
+        return data.get(self.identifier, {})
