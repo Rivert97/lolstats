@@ -1,57 +1,29 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-
-		 <link rel="preconnect" href="https://fonts.googleapis.com">
-		 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;800;600&display=swap" rel="stylesheet"> 
-		<link rel="stylesheet" type="text/css" href="{% static 'champions/normalize.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'champions/main.css' %}">
-
-		<title>Campeones</title>
-	</head>
-	<body>
-		<header class="site-header">
-			<div class="header-content">
-				<div class="header-logo">
-				</div>
-				<ul class="navigation">
-					<a href="#"><div>Invocadores</div></a>
-					<a href="#"><div class="active">Campeones</div></a>
-					<a href="#"><div>Objetos</div></a>
-				</div>
-			</div>
-		</header>
-		<main>
-			<div class="container">
-				<div class="search-bar">
-					<form>
-						<input type="text" name="search_text"/>
-						<input type="submit" value="Buscar"/>
-				</div>
-				<div class="rol-bar">
-					<div class="active"><a href="#">Todos</a></div>
-					<div><a href="#">Superior</a></div>
-					<div><a href="#">Jungla</a></div>
-					<div><a href="#">Medio</a></div>
-					<div><a href="#">Inferior</a></div>
-					<div><a href="#">Soporte</a></div>
-				</div>
-				<div class="champion-list">
-					{% for champion in champions %}
-					<a class="champion-item" href="{% url 'detail' champion.name %}">
-						{% with 'champion/'|add:champion.identifier|add:'.png' as champ_tile %}
-						<img src="{% static champ_tile %}"/>
-						{% endwith %}
-						<div>{{ champion.name }}</div>
-					</a>
-					{% endfor %}
-				</div>
-			</div>
-		</main>
-	</body>
-</html>
-
+{% block content %}
+	<div class="container">
+		<div class="search-bar">
+			<form>
+				<input type="text" name="search_text"/>
+				<input type="submit" value="Buscar"/>
+		</div>
+		<div class="rol-bar">
+			<div class="active"><a href="#">Todos</a></div>
+			<div><a href="#">Superior</a></div>
+			<div><a href="#">Jungla</a></div>
+			<div><a href="#">Medio</a></div>
+			<div><a href="#">Inferior</a></div>
+			<div><a href="#">Soporte</a></div>
+		</div>
+		<div class="champion-list">
+			{% for champion in champions %}
+			<a class="champion-item" href="{% url 'detail' champion.name %}">
+				{% with 'champion/'|add:champion.identifier|add:'.png' as champ_tile %}
+				<img src="{% static champ_tile %}"/>
+				{% endwith %}
+				<div>{{ champion.name }}</div>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

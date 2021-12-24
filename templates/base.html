@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		 <link rel="preconnect" href="https://fonts.googleapis.com">
+		 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;800;600&display=swap" rel="stylesheet"> 
+		<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+		<title>Campeones</title>
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="header-content">
+				<div class="header-logo">
+				</div>
+				<ul class="navigation">
+					<a href="#"><div>Invocadores</div></a>
+					<a href="#"><div class="active">Campeones</div></a>
+					<a href="#"><div>Objetos</div></a>
+				</div>
+			</div>
+		</header>
+		<main>
+			{% block content %}
+			{% endblock %}
+		</main>
+	</body>
+</html>
+
