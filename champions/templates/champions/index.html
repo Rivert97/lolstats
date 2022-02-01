@@ -2,27 +2,15 @@
 {% load static %}
 {% block content %}
 	<div class="container">
-		<div class="search-bar">
-			<form>
-				<input type="text" name="search_text"/>
-				<input type="submit" value="Buscar"/>
-		</div>
-		<div class="rol-bar">
-			<div class="active"><a href="#">Todos</a></div>
-			<div><a href="#">Superior</a></div>
-			<div><a href="#">Jungla</a></div>
-			<div><a href="#">Medio</a></div>
-			<div><a href="#">Inferior</a></div>
-			<div><a href="#">Soporte</a></div>
-		</div>
-		<div class="champion-list">
+		<div class="row justify-content-between">
 			{% for champion in champions %}
-			<a class="champion-item" href="{% url 'detail' champion.identifier %}">
-				{% with 'champion/'|add:champion.identifier|add:'.png' as champ_tile %}
-				<img src="{% static champ_tile %}"/>
-				{% endwith %}
-				<div>{{ champion.name }}</div>
-			</a>
+			<div class="p-2" style="width: 5.5rem">
+				<a class="text-decoration-none text-center text-secondary" href="{% url 'champions/detail' champion.identifier %}">
+					{% with 'champion/'|add:champion.identifier|add:'.png' as champ_tile %}
+					<img class="rounded-circle active-border" src="{% static champ_tile %}" class="image-thumbnail"/>
+					{% endwith %}
+				</a>
+			</div>
 			{% endfor %}
 		</div>
 	</div>

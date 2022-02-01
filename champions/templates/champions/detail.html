@@ -1,36 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{% static 'champions/css/detail.css' %}">
+{% endblock %}
 {% block content %}
 	<div class="container">
-		<div class="champ-summary">
-			<div class="champ-img">
+		<div class="row">
+			<div class="col-2">
 				{% with 'champion/'|add:champion.identifier|add:'.png' as champ_tile %}
 				<img src="{% static champ_tile %}"/>
 				{% endwith %}
 			</div>
-			<div class="champ-detail">
-				<div class="champ-name">
-					<span>{{ champion.name }}</span>
+			<div class="col-9 align-self-end">
+				<div class="row">
+					<h2>{{ champion.name }}</h2>
 				</div>
-				<div class="champ-spells">
-					<div class="spell">
+				<div class="row">
+					<div class="px-1" style="width: 3rem">
 						{% with 'passive/'|add:data.passive.image.full as passive_img %}
-						<img src="{% static passive_img %}"/>
+						<img data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<b>{{ data.passive.name }}</b></br></br>{{ data.passive.description }}" src="{% static passive_img %}"/>
 						{% endwith %}
-						<div class="spell-descr">
-							<span class="spell-name">{{ data.passive.name }}</span>
-							<span class="spell-text">{{ data.passive.description }}</span>
-						</div>
 					</div>
 					{% for spell in data.spells %}
-						<div class="spell">
+						<div class="px-1" style="width: 3rem">
 							{% with 'spell/'|add:spell.image.full as spell_img %}
-							<img src="{% static spell_img %}"/>
+							<img data-bs-toggle="tooltip" data-bs-html="true" data-bs-placement="bottom" title="<b>{{ spell.name }}</b></br></br>{{ spell.description }}" src="{% static spell_img %}"/>
 							{% endwith %}
-							<div class="spell-descr">
-								<span class="spell-name">{{ spell.name }}</span>
-								<span class="spell-text">{{ spell.description }}</span>
-							</div>
 						</div>
 					{% endfor %}
 				</div>
