@@ -2,7 +2,7 @@ import json
 import os
 
 DATA_DIR = "/datos/data_dragon/data/es_MX/"
-PROJECT_DIR = "/home/rgarcia/Documents/projects/lolstats"
+PROJECT_DIR = "/home/rgarcia/projects/lolstats"
 
 def update_champions():
     """Actualiza el fixture de los campeones."""
