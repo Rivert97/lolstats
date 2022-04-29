@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="container">
+		<div class="input-group mt-5">
+			<input class="form-control" type="search" placeholder="Invocador" id="summonerName" aria-label="Invocador">
+			<button class="btn btn-outline-secondary dropdown-toggle" type="button" id="btnRegion" data-bs-toggle="dropdown" aria-expanded="false">{{ region }}</button>
+			<ul class="dropdown-menu dropdown-menu-end">
+				{% for reg in regions %}
+				<li><a class="dropdown-item" href="{% url 'summoners/index' %}{{ reg }}">{{ reg }}</a></li>
+				{% endfor %}
+			</ul>
+			<button class="btn btn-outline-success" type="submit" onclick="return search_summoner();">Buscar</button>
+		</div>
+	</div>
+{% endblock %}
+
+{% block scripts %}
+	<script src="{% static 'summoners/js/index.js' %}"></script>
+{% endblock %}
+

@@ -28,7 +28,7 @@
 						<ul class="navbar-nav me-auto mb-2 mb-md-0">
 							<li class="nav-item">
 								{% if 'summoners' in request.path %}
-									<a class="nav-link active" href="#" aria-current="page">Invocadores</a>
+								<a class="nav-link active" href="{% url 'summoners/index' %}" aria-current="page">Invocadores</a>
 								{% else %}
 									<a class="nav-link" href="#">Invocadores</a>
 								{% endif %}
@@ -58,6 +58,8 @@
 		</main>
 		<script src="{% static 'libs/bootstrap-5.1.3/js/bootstrap.bundle.min.js' %}"></script>
 		<script src="{% static 'js/main.js' %}"></script>
+		{% block scripts %}
+		{% endblock %}
 	</body>
 	<footer class="footer mt-auto py-3 bg-light">
 		<div class="container">
