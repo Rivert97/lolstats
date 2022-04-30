@@ -1,17 +1,23 @@
 import json
 import os
+import platform
+from pathlib import Path
 
-DATA_DIR = "/datos/data_dragon/data/es_MX/"
-PROJECT_DIR = "/home/rgarcia/projects/lolstats"
+if "Windows" == platform.system():
+    DATA_DIR = "D:/datos/data_dragon/data/es_MX/"
+else:
+    DATA_DIR = "/datos/data_dragon/data/es_MX/"
+
+PROJECT_DIR = Path(__file__).resolve().parent.parent
 
 def update_champions():
     """Actualiza el fixture de los campeones."""
     # Load data_dragon .json
-    filepath = DATA_DIR + "/champion.json"
+    filepath = DATA_DIR + "champion.json"
     rawdata = {}
     champ_fixture = []
     if os.path.isfile(filepath):
-        with open(filepath, 'r') as f:
+        with open(filepath, 'r', encoding="utf8") as f:
             rawdata = json.load(f)
 
     # Create fixture data
@@ -32,7 +38,7 @@ def update_champions():
             i += 1
 
     # Save fixture
-    fixturepath = PROJECT_DIR + "/champions/fixtures/champions.json"
+    fixturepath = str(PROJECT_DIR / "champions/fixtures/champions.json")
     with open(fixturepath, 'w') as f:
         json.dump(champ_fixture, f)
 

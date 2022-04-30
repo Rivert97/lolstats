@@ -3,3 +3,4 @@ data_dragon
 .my.cnf
 **/__pycache__/
 lolstats.conf
+**/fixtures/*

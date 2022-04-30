@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-                BASE_DIR / "templates",
+                str(BASE_DIR / "templates"),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/home/rgarcia/projects/lolstats/.my.cnf',
+            'read_default_file': str(BASE_DIR / '.my.cnf'),
         },
     }
 }
