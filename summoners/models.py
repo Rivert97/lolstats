@@ -5,6 +5,7 @@ import json
 import os
 import datetime
 import time
+import platform
 
 API_ROUTINGS = {
         'NA': 'https://na1.api.riotgames.com',
@@ -20,9 +21,14 @@ API_URLS = {
         'GetMatchByID': '/lol/match/v5/matches/%s',
         'GetAllLeagueEntries': '/lol/league-exp/v4/entries/%s/%s/%s',
         }
-CONFIG = "/home/rgarcia/projects/lolstats/lolstats.conf"
+
+if "Windows" == platform.system():
+    CONFIG = "D:/Usuarios/betog/Documentos/projects/lolstats/lolstats.conf"
+    DATA_PATH = "D:/datos/lolstats/"
+else:
+    CONFIG = "/home/rgarcia/projects/lolstats/lolstats.conf"
+    DATA_PATH = "/datos/lolstats/"
 SOLODUO_QUEUE = 420
-DATA_PATH = "/datos/lolstats/"
 
 MAX_PER_SECOND = 20
 MAX_PER_2_MINUTES = 100

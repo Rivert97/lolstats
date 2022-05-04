@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'champions.apps.ChampionsConfig',
-    'summoners',
+    'summoners.apps.SummonersConfig',
 ]
 
 MIDDLEWARE = [
