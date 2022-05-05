@@ -5,7 +5,7 @@ from .models import Game
 class SummonerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Summoner
-        fields = ('summonerid', 'puuid', 'level', 'region')
+        fields = ('summonerid', 'name', 'puuid', 'level', 'region')
 
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
