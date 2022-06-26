@@ -6,6 +6,10 @@ import os
 import datetime
 import time
 import platform
+import glob
+import sys
+sys.path.append('/home/rgarcia/projects/lolstats')
+from champions.models import Champion
 
 API_ROUTINGS = {
         'NA': 'https://na1.api.riotgames.com',
@@ -21,6 +25,23 @@ API_URLS = {
         'GetMatchByID': '/lol/match/v5/matches/%s',
         'GetAllLeagueEntries': '/lol/league-exp/v4/entries/%s/%s/%s',
         }
+TIERS = {
+    'IRON': 1,
+    'BRONZE': 2,
+    'SILVER': 3,
+    'GOLD': 4,
+    'PLATINUM': 5,
+    'DIAMOND': 6,
+    'MASTER': 7,
+    'GRANDMASTER': 8,
+    'CHALLENGER': 9,
+    }
+DIVISIONS = {
+    'I': 1,
+    'II': 2,
+    'III': 3,
+    'IV': 4,
+    }
 
 if "Windows" == platform.system():
     CONFIG = "D:/Usuarios/betog/Documentos/projects/lolstats/lolstats.conf"
@@ -46,7 +67,6 @@ class Summoner(models.Model):
     name = models.CharField(max_length=30)
     summonerid = models.CharField(max_length=63)
     puuid = models.CharField(max_length=78)
-    level = models.IntegerField()
     region = models.CharField(max_length=5)
     inserttime = models.DateTimeField(auto_now_add=True)
     updatetime = models.DateTimeField(auto_now=True)
@@ -79,7 +99,6 @@ class Summoner(models.Model):
             self.name = values['name']
             self.summonerid = values['id']
             self.puuid = values['puuid']
-            self.level = values['summonerLevel']
             self.region = region
         else:
             print(response.text)
@@ -133,9 +152,54 @@ class Summoner(models.Model):
             entries = {}
         return entries
 
+    def fetch_file(self):
+        """."""
+        filepath = "%s/summoners/%s.json" %(DATA_PATH, self.id)
+        data = {}
+        if os.path.exists(filepath):
+            with open(filepath, 'r') as f:
+                data = json.load(f)
+        return data
+    
+    def fetch_rank(self):
+        """."""
+        filepath = "%s/tiers/LAN/*.json" %(DATA_PATH,)
+        files = glob.glob(filepath)
+        files.sort(key=os.path.getmtime)
+        for f in files:
+            with open(f, 'r') as fr:
+                data = json.load(fr)
+            for entry in data:
+                if isinstance(entry, dict) and entry['summonerId'] == self.summonerid:
+                    rank = {
+                        'tier': TIERS[entry['tier']],
+                        'division': DIVISIONS[entry['rank']],
+                        }
+                    return rank
+        return None
+
+class SummonerStats(models.Model):
+    """Estadisticas del invocador.
+
+    Guarda y manipula las estadisticas del invocador
+    """
+    summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
+    winrate = models.FloatField()
+    winstreak = models.IntegerField()
+    meankda = models.FloatField()
+    tier = models.IntegerField()
+    division = models.IntegerField()
+    level = models.IntegerField()
+
+    def __str__(self):
+        """Devuelve la descripcion del objeto."""
+        return self.summoner.name
+
 class Game(models.Model):
     """."""
     gameid = models.CharField(max_length=14)
+    winner = models.IntegerField(default=0)
+    gamedate = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         """."""
@@ -184,11 +248,22 @@ class Game(models.Model):
             with open(filepath, 'w') as f:
                 f.write(self.jsondata)
 
+    def fetch_file(self):
+        """."""
+        filepath = "%s/games/%s.json" %(DATA_PATH, self.id)
+        data = {}
+        if os.path.exists(filepath):
+            with open(filepath, 'r') as f:
+                data = json.load(f)
+        return data
+
 class GameRecord(models.Model):
     """."""
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     teamid = models.IntegerField()
+    champion = models.ForeignKey(Champion, on_delete=models.CASCADE)
+    win = models.BooleanField()
 
     def __str__(self):
         """."""

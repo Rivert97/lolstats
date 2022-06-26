@@ -1,5 +1,8 @@
 import os
 import sys
+import numpy as np
+import pandas as pd
+import tensorflow as tf
 
 sys.path.append('/home/rgarcia/projects/lolstats')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lolstats.settings")
