@@ -11,8 +11,8 @@ class Champion(models.Model):
     los detalles se guardan en un archivo JSON.
     """
     identifier = models.CharField(max_length=20)
-    key = models.CharField(max_length=4)
     name = models.CharField(max_length=20)
+    championid = models.IntegerField()
 
     def __str__(self):
         """Devuelve la descripcion del objeto."""

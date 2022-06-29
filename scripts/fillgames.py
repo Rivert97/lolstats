@@ -42,7 +42,7 @@ def main():
                 record = GameRecord(game=game, summoner=summ)
             record.teamid = player['teamId']
             try:
-                champion = Champion.objects.get(key=player['championId'])
+                champion = Champion.objects.get(championid=player['championId'])
             except Champion.DoesNotExist:
                 print("Omitiendo campeon", player['championId'])
                 continue

@@ -30,7 +30,7 @@ def update_champions():
                     "pk": i,
                     "fields": {
                         "identifier": champions[name]['id'],
-                        "key": champions[name]['key'],
+                        "championid": champions[name]['key'],
                         "name": champions[name]['name'],
                     }
                   }

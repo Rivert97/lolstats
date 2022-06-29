@@ -24,6 +24,7 @@ API_URLS = {
         'GetMatchesByPUUID': '/lol/match/v5/matches/by-puuid/%s/ids',
         'GetMatchByID': '/lol/match/v5/matches/%s',
         'GetAllLeagueEntries': '/lol/league-exp/v4/entries/%s/%s/%s',
+        'GetChampionsMastery': '/lol/champion-mastery/v4/champion-masteries/by-summoner/%s',
         }
 TIERS = {
     'IRON': 1,
@@ -152,6 +153,22 @@ class Summoner(models.Model):
             entries = {}
         return entries
 
+    def search_champions_mastery(self, region="LAN"):
+        """."""
+        config = configparser.ConfigParser()
+        config.read(CONFIG)
+        url = API_ROUTINGS[region] + API_URLS['GetChampionsMastery'] %(self.summonerid)
+        headers = {
+                "X-Riot-Token": config['riot_api']['KEY'],
+                }
+        response = make_request(url, headers=headers)
+        if 200 == response.status_code:
+            champions = json.loads(response.text)
+        else:
+            print(response.text)
+            champions = {}
+        return champions
+
     def fetch_file(self):
         """."""
         filepath = "%s/summoners/%s.json" %(DATA_PATH, self.id)
@@ -269,7 +286,18 @@ class GameRecord(models.Model):
         """."""
         text = "%s %s" %(self.summoner, self.game)
         return text
-    
+
+class SummonerChampionStats(models.Model):
+    """."""
+    summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
+    champion = models.ForeignKey(Champion, on_delete=models.CASCADE)
+    championpoints = models.IntegerField()
+
+    def __str__(self):
+        """."""
+        text = "%s %s" %(self.summoner, self.champion)
+        return text
+
 def make_request(url, headers={}):
     """."""
     global countPerSecond, countPer2Minutes, lastSecond, lastMinute
