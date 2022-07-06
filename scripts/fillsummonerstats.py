@@ -24,13 +24,12 @@ def main():
         stats.level = data['summonerLevel']
         rank = summ.fetch_rank()
         if rank is None:
-            print("Omitiendo invocador", summ)
-            continue
-        stats.tier = rank['tier']
-        stats.division = rank['division']
-        stats.winrate = 0
-        stats.winstreak = 0
-        stats.meankda = 0
+            print("Sin datos de rank para invocador", summ)
+            stats.tier = 0
+            stats.division = 0
+        else:
+            stats.tier = rank['tier']
+            stats.division = rank['division']
         stats.save()
         print(i, "->", summ)
         i += 1

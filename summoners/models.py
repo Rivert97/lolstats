@@ -201,9 +201,6 @@ class SummonerStats(models.Model):
     Guarda y manipula las estadisticas del invocador
     """
     summoner = models.ForeignKey(Summoner, on_delete=models.CASCADE)
-    winrate = models.FloatField()
-    winstreak = models.IntegerField()
-    meankda = models.FloatField()
     tier = models.IntegerField()
     division = models.IntegerField()
     level = models.IntegerField()
@@ -281,6 +278,7 @@ class GameRecord(models.Model):
     teamid = models.IntegerField()
     champion = models.ForeignKey(Champion, on_delete=models.CASCADE)
     win = models.BooleanField()
+    kda = models.FloatField()
 
     def __str__(self):
         """."""
