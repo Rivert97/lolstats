@@ -55,8 +55,8 @@ def main():
                     game_results.append(1)
             print("Game:", j, "->", game)
             j += 1
-        filepath = "/datos/lolstats/datasets/%s.csv" %(summoner.id)
-        filepath_truth = "/datos/lolstats/datasets/%s_truth.csv" %(summoner.id)
+        filepath = "/datos/lolstats/datasets_ann1/%s.csv" %(summoner.id)
+        filepath_truth = "/datos/lolstats/datasets_ann1/%s_truth.csv" %(summoner.id)
         dataset = np.array(summoner_records)
         dataset_truth = np.array(game_results)
         np.savetxt(filepath, dataset, delimiter=',')

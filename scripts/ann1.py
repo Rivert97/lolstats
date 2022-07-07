@@ -4,8 +4,8 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import sklearn.model_selection
 
-datafile = "/datos/lolstats/datasets/final.csv"
-truthfile = "/datos/lolstats/datasets/final_truth.csv"
+datafile = "/datos/lolstats/datasets_ann1/final.csv"
+truthfile = "/datos/lolstats/datasets_ann1/final_truth.csv"
 
 # Model / data parameters
 num_classes = 2
@@ -34,9 +34,6 @@ model = keras.Sequential(
     [
         keras.Input(shape=input_shape),
         layers.Dense(160, activation="relu"),
-        layers.Dense(160, activation="relu"),
-        layers.Dense(80, activation="relu"),
-        layers.Dropout(0.5),
         layers.Dense(num_classes, activation="sigmoid"),
     ]
 )
@@ -46,8 +43,8 @@ model.summary()
 
 # Train the model
 print("Training model...")
-batch_size = 128
-epochs = 100
+batch_size = 1000
+epochs = 1000
 
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
@@ -60,3 +57,5 @@ score = model.evaluate(x_test, y_test, verbose=0)
 print("Test loss:", score[0])
 print("Test accuracy:", score[1])
 
+print(x_train.shape[0], "train samples")
+print(x_test.shape[0], "test samples")
