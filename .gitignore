@@ -4,3 +4,4 @@ data_dragon
 **/__pycache__/
 lolstats.conf
 **/fixtures/*
+.env
